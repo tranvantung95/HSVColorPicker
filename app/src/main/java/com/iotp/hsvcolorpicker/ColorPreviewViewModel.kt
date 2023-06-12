@@ -1,6 +1,7 @@
 package com.iotp.hsvcolorpicker
 
 import android.graphics.Color
+import android.util.Log
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -37,7 +38,7 @@ class ColorPreviewViewModel : ViewModel() {
         )
     }
 
-     fun createColorFromHex() {
+    fun createColorFromHex() {
         val color = Color.parseColor(hexColor.toString())
     }
 
@@ -57,9 +58,34 @@ class ColorPreviewViewModel : ViewModel() {
 
     fun isValidHexColor(color: String): Boolean {
         val hexColorRegex = Regex("^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$")
-        val result = hexColorRegex.matches(color) && hexColorValid(color)
-        return result
+        val result = parseHexColorToInt(color)
+        //hexColorRegex.matches(color) && hexColorValid(color)
+        return result != -1
     }
+
+    fun parseHexColorToInt(hexColor: String): Int {
+        val sanitizedHexColor = hexColor.trimStart('#')
+        val hexLength = sanitizedHexColor.length
+
+        if (hexLength != 3 && hexLength != 6) {
+            Log.e("InValid hex color","Invalid hex color format")
+        }
+
+        val hex = if (hexLength == 3) {
+            sanitizedHexColor.map { "$it$it" }.joinToString("")
+        } else {
+            sanitizedHexColor
+        }
+
+        return try {
+            hex.toInt(16)
+        } catch (e: NumberFormatException) {
+            Log.e("InValid hex color","Invalid hex color format")
+            return  -1
+
+        }
+    }
+
 
     class ColorPreviewViewModelFactory() : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {

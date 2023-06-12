@@ -39,11 +39,12 @@
                 android:id="@+id/hexColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minWidth="25dp"
                 android:layout_gravity="center"
                 android:paddingTop="10dp"
                 android:paddingEnd="8dp"
                 android:paddingBottom="10dp"
-                android:text="#ffffff"
+                android:hint="#ffffff"
                 android:textColor="@color/cpv_color_black_alpha50"
                 android:textSize="16sp" />
         </LinearLayout>

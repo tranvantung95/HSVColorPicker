@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="cpv_color_f2">#F2F2F2</color>
+    <color name="cpv_color_f2">#FFF</color>
     <color name="cpv_color_black">#000000</color>
     <color name="cpv_color_black_alpha50">#80000000</color>
 </resources>

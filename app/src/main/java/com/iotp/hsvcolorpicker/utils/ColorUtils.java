@@ -24,4 +24,9 @@ public class ColorUtils {
         argb[3] = Color.blue(color);
         return argb;
     }
+    public  static float[] argbToHsv(int argbColor){
+        float[]  hsv = new float[3];
+        Color.RGBToHSV(Color.red(argbColor), Color.green(argbColor), Color.blue(argbColor), hsv);
+        return  hsv;
+    }
 }

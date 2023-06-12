@@ -50,24 +50,34 @@ public class ColorEnvelope {
     }
 
     /**
-     * @return Red color
+     * @return hue color
      */
     public int getHueColor() {
-        return argb[1];
+        return (int)ColorUtils.argbToHsv(color)[0];
+    }
+
+    public  int getRedColor(){
+        return  argb[1];
+    }
+    public  int getGreenColor(){
+        return  argb[2];
+    }
+    public  int getBlueColor(){
+        return  argb[3];
     }
 
     /**
-     * @return green color
+     * @return sat color
      */
     public int getSatColor() {
-        return argb[2];
+      return   (int)ColorUtils.argbToHsv(color)[1];
     }
 
     /**
-     * @return blue color
+     * @return val color
      */
     public int getValColor() {
-        return argb[3];
+      return   (int)ColorUtils.argbToHsv(color)[2];
     }
 
     public String formatAlphaValue() {

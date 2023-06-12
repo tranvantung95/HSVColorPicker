@@ -52,22 +52,19 @@ class MainActivity : AppCompatActivity(), OnSatChangedListener, HueColorChangedL
     }
 
     override fun onAlphaChanged(newColor: Int) {
-        colorPreview.updateAlphaColor(ColorEnvelope(newColor))
+        val color = ColorEnvelope(newColor)
+        colorPreview.updateColor(color)
+        satView.updateAlpha(color,false)
     }
 
-    override fun onHueChanged(hueColor: Float) {
-        colorPreview.updateRedColor(ColorEnvelope(hueColor.toInt()))
-        satView.updateHue(ColorEnvelope(hueColor.toInt()), false)
-        alphaView.updateHue(hueColor.toInt(), false)
+    override fun onHueChanged(colorEnvelope: ColorEnvelope) {
+        colorPreview.updateColor(colorEnvelope)
+        satView.updateHue(colorEnvelope, false)
+        alphaView.updateHue(colorEnvelope.hueColor, false)
     }
 
     override fun onSatChange(colorEnvelope: ColorEnvelope?, fromUser: Boolean) {
         alphaView.updateAlpha(colorEnvelope!!.color)
-        colorPreview.apply {
-            updateAlphaColor(colorEnvelope)
-            updateRedColor(colorEnvelope)
-            updateGreenColor(colorEnvelope)
-            updateBlueColor(colorEnvelope)
-        }
+        colorPreview.updateColor(colorEnvelope)
     }
 }

@@ -21,6 +21,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.iotp.hsvcolorpicker.event.OnSatChangedListener;
+import com.iotp.hsvcolorpicker.utils.ColorUtils;
 import com.iotp.hsvcolorpicker.utils.Constant;
 import com.iotp.hsvcolorpicker.utils.DrawingUtils;
 
@@ -320,12 +321,20 @@ public class SatView extends View {
     }
 
     public void updateHue(ColorEnvelope colorEnvelope, boolean callBack) {
-        this.hue = colorEnvelope.getHueColor();
+        this.hue = ColorUtils.argbToHsv(colorEnvelope.getColor())[0];
         this.callBack = callBack;
-        invalidate();
         if (callBack) {
             onSatChangedListener.onSatChange(new ColorEnvelope(Color.HSVToColor(alpha, new float[]{hue, sat, val})), false);
         }
+        invalidate();
+    }
+    public  void updateAlpha(ColorEnvelope colorEnvelope, boolean callBack){
+        this.alpha = colorEnvelope.getAlphaColor();
+        this.callBack = callBack;
+        if (callBack) {
+            onSatChangedListener.onSatChange(new ColorEnvelope(Color.HSVToColor(alpha, new float[]{hue, sat, val})), false);
+        }
+        invalidate();
     }
 
     private boolean moveTrackersIfNeeded(MotionEvent event) {

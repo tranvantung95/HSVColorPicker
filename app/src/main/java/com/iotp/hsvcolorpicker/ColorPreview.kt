@@ -88,9 +88,6 @@ class ColorPreview @JvmOverloads constructor(
                     viewModel.alphaValue.postValue(result.roundToInt())
                     callBack = true
                     edtAlpha.setSelection(s.length)
-//                    customLifecycleOwner.lifecycle.coroutineScope.launch {
-//                        hexFlow?.emit(s.toString())
-//                    }
                 }
             }
         }
@@ -208,45 +205,47 @@ class ColorPreview @JvmOverloads constructor(
 
     fun setInitColor(color: ColorEnvelope) {
         removeTextChangeListener()
-        edtHexColor.setText(color.hexCode.orEmpty())
+        if (!edtHexColor.isFocused){
+            edtHexColor.setText(color.hexCode.orEmpty())
+        }
         edtAlpha.setText(color.formatAlphaValue().toString())
         edtAlpha.setSelection(edtAlpha.text?.length ?: 0)
-        edtBlueColor.setText(color.valColor.toString())
+        edtBlueColor.setText(color.blueColor.toString())
         edtBlueColor.setSelection(edtBlueColor.text?.length ?: 0)
-        edtRedColor.setText(color.hueColor.toString())
+        edtRedColor.setText(color.redColor.toString())
         edtRedColor.setSelection(edtRedColor.text?.length ?: 0)
-        edtGreenColor.setText(color.satColor.toString())
+        edtGreenColor.setText(color.greenColor.toString())
         edtGreenColor.setSelection(edtGreenColor.text?.length ?: 0)
         colorPanelView.color = color.color
         addTextChangeListener()
     }
 
 
-    fun updateRedColor(color: ColorEnvelope) {
+    private fun updateRedColor(color: ColorEnvelope) {
         edtRedColor.removeTextChangedListener(redTextChange)
-        edtRedColor.setText(color.hueColor.toString())
-        viewModel.redValue.postValue(color.hueColor)
+        edtRedColor.setText(color.redColor.toString())
+        viewModel.redValue.postValue(color.redColor)
         callBack = false
         edtRedColor.addTextChangedListener(redTextChange)
     }
 
-    fun updateGreenColor(color: ColorEnvelope) {
+    private fun updateGreenColor(color: ColorEnvelope) {
         edtGreenColor.removeTextChangedListener(greenTextChange)
-        edtGreenColor.setText(color.satColor.toString())
+        edtGreenColor.setText(color.greenColor.toString())
         callBack = false
-        viewModel.greenValue.postValue(color.satColor)
+        viewModel.greenValue.postValue(color.greenColor)
         edtGreenColor.addTextChangedListener(greenTextChange)
     }
 
-    fun updateBlueColor(color: ColorEnvelope) {
+    private fun updateBlueColor(color: ColorEnvelope) {
         edtBlueColor.removeTextChangedListener(blueTextChange)
-        edtBlueColor.setText(color.valColor.toString())
+        edtBlueColor.setText(color.blueColor.toString())
         callBack = false
-        viewModel.blueValue.postValue(color.valColor)
+        viewModel.blueValue.postValue(color.blueColor)
         edtBlueColor.addTextChangedListener(blueTextChange)
     }
 
-    fun updateAlphaColor(color: ColorEnvelope) {
+    private fun updateAlphaColor(color: ColorEnvelope) {
         edtAlpha.removeTextChangedListener(alphaTextChange)
         edtAlpha.setText(color.formatAlphaValue())
         callBack = false
@@ -254,12 +253,19 @@ class ColorPreview @JvmOverloads constructor(
         edtAlpha.addTextChangedListener(alphaTextChange)
     }
 
+    fun updateColor(color: ColorEnvelope) {
+        updateAlphaColor(color)
+        updateRedColor(color)
+        updateGreenColor(color)
+        updateBlueColor(color)
+    }
 
     private fun findControl() {
         edtAlpha.filters = arrayOf(InputFilterMinMax(0, 100))
         edtRedColor.filters = arrayOf(InputFilterMinMax(0, 255))
         edtGreenColor.filters = arrayOf(InputFilterMinMax(0, 255))
         edtBlueColor.filters = arrayOf(InputFilterMinMax(0, 255))
+
     }
 
     private fun observeData() {
@@ -272,7 +278,8 @@ class ColorPreview @JvmOverloads constructor(
             }
 
             viewModel.hexColor.observe(owner) {
-                val color = Color.parseColor(it)
+                val color = viewModel.parseHexColorToInt(it)
+                //Color.parseColor(it)
                 setInitColor(ColorEnvelope(color))
                 if (callBack) {
                     onColorChange?.invoke(color)

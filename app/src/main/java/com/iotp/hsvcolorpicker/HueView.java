@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.RectF;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
 import com.iotp.hsvcolorpicker.event.HueColorChangedListener;
+import com.iotp.hsvcolorpicker.utils.Constant;
 import com.iotp.hsvcolorpicker.utils.DrawingUtils;
 
 public class HueView extends View {
@@ -46,7 +48,7 @@ public class HueView extends View {
     private BitmapCache hueBackgroundCache;
 
     /* Current values */
-    private int alpha = 255;
+    private int alpha = Constant.DEFAULT_ALPHA_VALUE;
     private float hue = 360f;
     private float sat = 1f;
     private float val = 1f;
@@ -185,6 +187,7 @@ public class HueView extends View {
                 }
             }
         }
+
         Resources res = getResources();
         RoundedBitmapDrawable dr =
                 RoundedBitmapDrawableFactory.create(res, hueBackgroundCache.bitmap);
@@ -257,7 +260,7 @@ public class HueView extends View {
         if (hueRect.contains(startX, startY)) {
             hue = pointToHue(event.getX());
             if (hueColorChangedListener != null) {
-                hueColorChangedListener.onHueChanged(Color.HSVToColor(this.alpha, new float[]{hue, sat, val}));
+                hueColorChangedListener.onHueChanged(new ColorEnvelope(getColor()));
             }
             update = true;
         }
@@ -369,7 +372,7 @@ public class HueView extends View {
         val = hsv[2];
         callBack = callback;
         if (callBack && hueColorChangedListener != null) {
-            hueColorChangedListener.onHueChanged(Color.HSVToColor(this.alpha, new float[]{hue, sat, val}));
+            hueColorChangedListener.onHueChanged(new ColorEnvelope(getColor()));
         }
         invalidate();
     }
