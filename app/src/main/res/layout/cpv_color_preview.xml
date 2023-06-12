@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start|center"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvHex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="Hex"
+            android:textColor="@color/cpv_color_black"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/cpv_bg_4dp">
+
+            <com.iotp.hsvcolorpicker.ColorPanelView
+                android:id="@+id/panelView"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                app:cpv_colorShape="square"
+                android:layout_gravity="center"
+                android:layout_marginEnd="12dp"
+                android:orientation="vertical" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/hexColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingTop="10dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="10dp"
+                android:text="#ffffff"
+                android:textColor="@color/cpv_color_black_alpha50"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="10dp"
+            android:text="RBG"
+            android:textColor="@color/cpv_color_black"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtRed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/cpv_bg_4dp"
+                android:hint="Red"
+                android:inputType="number"
+                android:paddingStart="8dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="22dp"
+                android:paddingBottom="10dp"
+                android:textColor="@color/cpv_color_black_alpha50" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtGreen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/cpv_bg_4dp"
+                android:hint="Green"
+                android:inputType="number"
+                android:paddingStart="8dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="22dp"
+                android:paddingBottom="10dp"
+                android:textColor="@color/cpv_color_black_alpha50" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtBlue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/cpv_bg_4dp"
+                android:hint="Blue"
+                android:inputType="number"
+                android:paddingStart="8dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="22dp"
+                android:paddingBottom="10dp"
+                android:textColor="@color/cpv_color_black_alpha50" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtAlpha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/cpv_bg_4dp"
+                android:hint="Alpha"
+                android:inputType="number"
+                android:paddingStart="8dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="22dp"
+                android:paddingBottom="10dp"
+                android:textColor="@color/cpv_color_black_alpha50" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

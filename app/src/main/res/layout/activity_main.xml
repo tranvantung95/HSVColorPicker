@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:divider="?android:attr/dividerHorizontal"
+    android:orientation="vertical"
+    android:showDividers="middle">
+
+    <com.iotp.hsvcolorpicker.SatView
+        android:id="@+id/cpv_satView"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:padding="5dp" />
+
+    <com.iotp.hsvcolorpicker.HueView
+        android:id="@+id/cpv_hueView"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginTop="10dp"
+        android:padding="5dp" />
+
+    <com.iotp.hsvcolorpicker.AlphaView
+        android:id="@+id/cpv_alphaView"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginTop="10dp"
+        android:padding="5dp"
+        app:alphaChannelVisible="true"
+        app:cpv_borderColor="#0099cc"
+        app:cpv_colorShape="square" />
+
+
+    <com.iotp.hsvcolorpicker.ColorPreview
+        android:id="@+id/colorPreview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>

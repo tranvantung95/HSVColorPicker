@@ -1,0 +1,11 @@
+<resources>
+
+  <item name="cpv_color_picker_view" type="id"/>
+  <item name="cpv_color_panel_old" type="id"/>
+  <item name="cpv_color_panel_new" type="id"/>
+  <item name="cpv_preference_preview_color_panel" type="id"/>
+  <item name="cpv_hueView" type="id"/>
+  <item name="cpv_alphaView" type="id"/>
+  <item name="cpv_satView" type="id"/>
+
+</resources>
